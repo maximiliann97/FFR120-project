@@ -4,7 +4,7 @@ clc
 
 t0 = 0;
 tfinal = 15;
-y0 = [40; 10; 10];   
+y0 = [500; 20; 20];   
 [t,y] = ode23(@lotka_new,[t0 tfinal],y0);
 
 plot(t,y)

@@ -1,3 +1,6 @@
 function yp = lotka_new(t,y)
-    yp = diag([1 - .01*y(2), -1 + .02*y(1), -0.004 + y(1)])*y;
+    a = 1;
+    b = 2;
+    c = 3;
+    yp = diag([a - y(2) - y(3), -b + y(1), -c + y(1)])*y;
 end
