@@ -1,4 +1,5 @@
 function yp = lotka_new(t,y)
+    % Parameters need to be changed, these are arbitrary
     a = 0.01;   % exponential growth rate of the prey
     b = 0.02;   % decline rate in the prey population due to predation
     c = 0.03;   % exponential decline in population of predator 1
