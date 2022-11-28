@@ -1,15 +1,14 @@
 clear all
 close all
 clc
-syms x(t) y(t) z(t)
-a = 0.01;
-b = 0.02;
-c = 1;
 
-ode1 = diff(x) == a*x + x*y - x*z;
-ode2 = diff(y) == -b*y + x*y;
-ode3 = diff(z) == -c*z + x*z;
+t0 = 0;
+tfinal = 15;
+y0 = [40; 10; 10];   
+[t,y] = ode23(@lotka_new,[t0 tfinal],y0);
 
-odes = [ode1; ode2; ode3];
-
-S = dsolve(odes)
+plot(t,y)
+title('Predator/Prey Populations Over Time')
+xlabel('t')
+ylabel('Population')
+legend('Prey','Predators 1', 'Predators 2', 'Location','North')
