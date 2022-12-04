@@ -2,14 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class insects:
-    def __init__(self, N: int, age: int, hungry: bool):
+    def __init__(self, N: int):
         if isinstance(N, int):
             self.position = np.random.randint(1, N+1, 2)
         else:
             raise TypeError('Needs to take integer')
 
-        self.hungry = hungry
-        self.age = age
+        self.hungry = False
+        self.age = 0
         self.alive = True
         self.days_without_food = 0
 
