@@ -1,5 +1,3 @@
-import numpy as np
-
 class Rice:
     def __init__(self, fields):
         self.fields = fields
@@ -9,6 +7,6 @@ class Rice:
 
     def rice_gets_eaten(self, plant: int):
         # if animal == "Sparrow":
-        self.fields[plant, -1] -= 2  # Adds one rice grain per day
+        self.fields[plant, -1] -= 2  # Rice gets eaten
         if self.fields[plant, -1] < 0:
             self.fields[plant, -1] = 0
