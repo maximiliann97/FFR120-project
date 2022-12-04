@@ -30,6 +30,8 @@ class Sparrow:
 
     def age(self, day):
         self.age += day
+        if self.age > 365 * 2:
+            self.alive = False
 
     def food(self, food):
         if food:
