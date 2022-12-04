@@ -1,5 +1,5 @@
 import numpy as np
-
+import Rice
 
 class Sparrow:
     def __init__(self, N: int):
