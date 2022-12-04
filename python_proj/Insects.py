@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class insects:
+class Insects:
     def __init__(self, N: int):
         if isinstance(N, int):
             self.position = np.random.randint(1, N+1, 2)
@@ -43,9 +43,9 @@ class insects:
             self.alive = False
 
 
+'''
 
-
-o = insects(100)
+o = Insects(100)
 
 
 o.food(False)
@@ -55,3 +55,5 @@ o.food(False)
 o.food(False)
 print(o.days_without_food)
 print(o.alive)
+
+'''
