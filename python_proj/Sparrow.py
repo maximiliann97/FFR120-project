@@ -2,14 +2,13 @@ import numpy as np
 
 
 class Sparrow:
-    def __init__(self, N: int, age: int, hungry: bool):
+    def __init__(self, N: int):
         if isinstance(N, int):
             self.position = np.random.randint(1, N+1, 2)
         else:
             raise TypeError('Needs to take integer')
-        
-        self.age = age
-        self.hungry = hungry
+        self.age = 0
+        self.hungry = False
         self.alive = True
         self.days_without_food = 0
         
