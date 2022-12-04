@@ -45,7 +45,7 @@ class insects:
 
 
 
-o = insects(2, 5, True)
+o = insects(100)
 
 
 o.food(False)
