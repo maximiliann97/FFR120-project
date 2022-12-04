@@ -10,7 +10,8 @@ import numpy as np
 fig = plt.figure(figsize=(7,7))
 
 lattice_size = 100
-sparrow = []
+nSparrows = 30
+sparrow = [Sparrow(lattice_size) for _ in range(nSparrows)]
 Insects = []
 x,y = [], []
 
