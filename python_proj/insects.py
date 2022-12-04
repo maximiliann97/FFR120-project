@@ -26,6 +26,10 @@ class insects:
         else:
             raise TypeError('Needs to be true or false')
 
+    def age(self, day):
+        self.age += day
+        if self.age > 30:
+            self.alive = False
 
 
     def food(self, food):
