@@ -21,6 +21,7 @@ def main():
     for t in range(timesteps):
         for bird in sparrows:        # Birds move
             bird.move(rice_coords)
+            plt.scatter(bird.position[0], bird.position[1], c='b', marker='^')
         # for insect in insects:
         #     insect.move(rice_field[:, 0:2])
         for bird in sparrows:        # Birds eat
@@ -39,9 +40,9 @@ def main():
                 sparrows.remove(bird)   # bird dies
 
             # Animations
-            plt.scatter(bird.position[0], bird.position[1], c='b', marker='^')
+
         plt.scatter(rice_field[:, 0], rice_field[:, 1], c='g', s=500, zorder=-1, marker='s')
-        plt.pause(0.001)
+        plt.pause(1)
         plt.clf()
 
         # Insects eat
