@@ -7,8 +7,9 @@ from Insects import Insects
 from Rice import Rice
 
 
+
 def main():
-    timesteps = 1000
+    timesteps = 200
     lattice_size = 100
     nSparrows = 100
     nInsects = 50
@@ -21,9 +22,10 @@ def main():
     for t in range(timesteps):
         for bird in sparrows:        # Birds move
             bird.move(rice_coords)
-            plt.scatter(bird.position[0], bird.position[1], c='b', marker='^')
-        # for insect in insects:
-        #     insect.move(rice_field[:, 0:2])
+            plt.scatter(bird.position[0], bird.position[1], c='black', marker='^', s=50)
+        for insect in insects:
+            insect.move(rice_field[:, 0:2])
+            plt.scatter(insect.position[0], insect.position[1], marker="^", c="lightgreen", s=10)
         for bird in sparrows:        # Birds eat
             true_array = np.all(bird.position == rice_coords, axis=1)
             if True in true_array:  # If bird at rice field
@@ -42,7 +44,7 @@ def main():
             # Animations
 
         plt.scatter(rice_field[:, 0], rice_field[:, 1], c='g', s=500, zorder=-1, marker='s')
-        plt.pause(1)
+        plt.pause(0.01)
         plt.clf()
 
         # Insects eat
