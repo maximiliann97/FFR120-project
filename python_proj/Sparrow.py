@@ -30,15 +30,15 @@ class Sparrow:
         distance, rice_field_index = self.calc_distance(rice_field_coords)
         distance_limit = 25  # if below this sparrow move to closest rice field, else move randomly
         if distance < distance_limit:
-            self.position = rice_field_coords[rice_field_index, :]
+            self.position = rice_field_coords[rice_field_index, :][0][0]
         else:
             directions = ['up', 'down', 'left', 'right']
-            r = np.random.randint(0, 3)
+            r = np.random.randint(0, 4)
             direction = directions[r]
             if direction == 'up' and self.position[1] < self.lattice_size:
-                self.position[1] += 1
-            if direction == 'down' and self.position[1] > 0:
                 self.position[1] -= 1
+            if direction == 'down' and self.position[1] > 0:
+                self.position[1] += 1
             if direction == 'right' and self.position[0] < self.lattice_size:
                 self.position[0] += 1
             if direction == 'left' and self.position[0] > 0:
@@ -68,11 +68,11 @@ class Sparrow:
         index_min_rice_field = np.where(distances == min_distance)
         return (min_distance, index_min_rice_field)
 
-N =100
-rice = Rice(N, 20)
-coords = rice.fields[:,0:2]
-print(coords)
-o = Sparrow(N)
-print(o.position)
-o.move(coords)
-print(o.position)
+# N =100
+# rice = Rice(N, 20)
+# coords = rice.fields[:,0:2]
+# print(coords)
+# o = Sparrow(N)
+# print(o.position)
+# o.move(coords)
+# print(o.position)
