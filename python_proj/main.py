@@ -28,8 +28,11 @@ def main():
             if True in true_array:
                 rice_field_row = np.where(true_array == True)[0][0]
                 rice.rice_gets_eaten(rice_field_row)
-                print(rice.fields[:, -1])
+
         # Insects eat
+        rice.grow_rice()
+        n_birthed_birds = np.floor(len(sparrow) * 0.1)
+        sparrow += [Sparrow(lattice_size) for x in range(n_birthed_birds)]
 
 if __name__ == '__main__':
     main()
