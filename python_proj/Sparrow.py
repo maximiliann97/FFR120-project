@@ -57,7 +57,7 @@ class Sparrow:
             self.update_hungry(True)
             self.days_without_food += 1
 
-        if self.days_without_food > 5:
+        if self.days_without_food > 10:
             self.alive = False
 
     def calc_distance(self, rice_field_coords):
@@ -68,11 +68,8 @@ class Sparrow:
         index_min_rice_field = np.where(distances == min_distance)
         return (min_distance, index_min_rice_field)
 
-# N =100
-# rice = Rice(N, 20)
-# coords = rice.fields[:,0:2]
-# print(coords)
-# o = Sparrow(N)
-# print(o.position)
-# o.move(coords)
-# print(o.position)
+    def move_random(self):
+        self.position = np.random.randint(1, self.lattice_size + 1, 2)
+
+
+

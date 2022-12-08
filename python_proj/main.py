@@ -25,22 +25,31 @@ def main():
         #     insect.move(rice_field[:, 0:2])
         for bird in sparrows:        # Birds eat
             true_array = np.all(bird.position == rice_coords, axis=1)
-            if True in true_array:  # If bird is at rice field
-                bird.food(True)
+            if True in true_array:  # If bird at rice field
                 rice_field_row = np.where(true_array == True)[0][0]
-                rice.rice_gets_eaten(rice_field_row)
+                if rice_field[rice_field_row, -1] > 0:
+                    bird.food(True)
+                    bird.move_random()
+                    rice.rice_gets_eaten(rice_field_row)
+                else:
+                    bird.food(False)
             else:
                 bird.food(False)
             if not bird.alive:
                 sparrows.remove(bird)   # bird dies
 
+            # Animations
+            plt.scatter(bird.position[0], bird.position[1], c='b', marker='^')
+        plt.scatter(rice_field[:, 0], rice_field[:, 1], c='g', s=500, zorder=-1, marker='s')
+        plt.pause(0.001)
+        plt.clf()
 
         # Insects eat
-        produced_rice += sum(rice.fields[:, -1])
+        amount_rice = sum(rice.fields[:, -1])
         rice.grow_rice()
-        n_birthed_birds = np.floor(len(sparrows) * 0.001).astype(int)
+        n_birthed_birds = np.ceil(len(sparrows) * 0.015).astype(int)
         sparrows += [Sparrow(lattice_size) for _ in range(n_birthed_birds)]
-        print(f'timestep = {t}, birthed birds = {n_birthed_birds}, nBirds = {len(sparrows)}\nrice={produced_rice}')
+        print(f'timestep = {t}, birthed birds = {n_birthed_birds}, nBirds = {len(sparrows)}\nrice={amount_rice}')
 
 
 if __name__ == '__main__':
