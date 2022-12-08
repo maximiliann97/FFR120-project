@@ -7,6 +7,8 @@
     <list default="true" id="9a35271d-9643-4f9d-9829-a88dcc915ee8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python_proj/Rice.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_proj/Rice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_proj/Sparrow.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_proj/Sparrow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_proj/animation.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_proj/animation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +30,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="animation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FFR120-project" />

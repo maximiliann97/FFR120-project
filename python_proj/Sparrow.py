@@ -1,6 +1,7 @@
 import numpy as np
 import Rice
 
+
 class Sparrow:
     def __init__(self, N: int):
         if isinstance(N, int):
@@ -23,9 +24,6 @@ class Sparrow:
             self.alive = alive
         else:
             raise TypeError('Needs to take boolean')
-
-    def move(self, direction, grid):
-        return 0
 
     def age(self, day):
         self.age += day
