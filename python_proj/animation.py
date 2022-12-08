@@ -27,6 +27,4 @@ for i in range(200):
 
 
 
-# ani = FuncAnimation(fig, animate, interval=100)
-
 
