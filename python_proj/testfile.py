@@ -14,11 +14,11 @@ insects = [Insects(lattice_size) for _ in range(nInsects)]
 rice = Rice(lattice_size, 20)
 
 def update(frame):
+    produced_rice = 0
     rice_x = [field[0] for field in rice.fields]
     rice_y = [field[1] for field in rice.fields]
     rice_field = rice.fields
     rice_coords = rice_field[:, 0:2]
-    produced_rice = 0
 
     sparrow_x = [sparrow.position[0] for sparrow in sparrows]
     sparrow_y = [sparrow.position[1] for sparrow in sparrows]
@@ -33,29 +33,27 @@ def update(frame):
     plt.scatter(rice_x, rice_y, c='g', s=500, zorder=-1, marker='s')
     plt.title(f'Time step = {frame}')
 
-    # for bird in sparrows:        # Birds eat
-    #     true_array = np.all(bird.position == rice_coords, axis=1)
-    #     if True in true_array:  # If bird at rice field
-    #         rice_field_row = np.where(true_array == True)[0][0]
-    #         if rice_field[rice_field_row, -1] > 0:
-    #             bird.food(True)
-    #             bird.move_random()
-    #             rice.rice_gets_eaten(rice_field_row)
-    #         else:
-    #             bird.food(False)
-    #     else:
-    #         bird.food(False)
-    #     if not bird.alive:
-    #         sparrows.remove(bird)   # bird dies
-    #
-    #     # Animations
-    # # Insects eat
-    # produced_rice += sum(rice.fields[:, -1])
-    # amount_rice = sum(rice.fields[:, -1])
-    # rice.grow_rice()
-    # n_birthed_birds = np.ceil(len(sparrows) * 0.015).astype(int)
-    # sparrows += [Sparrow(lattice_size) for _ in range(n_birthed_birds)]
-    # print(f'timestep = {t}, birthed birds = {n_birthed_birds}, nBirds = {len(sparrows)}\nrice={amount_rice}')
+    for bird in sparrows:        # Birds eat
+        true_array = np.all(bird.position == rice_coords, axis=1)
+        if True in true_array:  # If bird at rice field
+            rice_field_row = np.where(true_array == True)[0][0]
+            if rice_field[rice_field_row, -1] > 0:
+                bird.food(True)
+                bird.move_random()
+                rice.rice_gets_eaten(rice_field_row)
+            else:
+                bird.food(False)
+        else:
+            bird.food(False)
+        if not bird.alive:
+            sparrows.remove(bird)   # bird dies
+
+    num_new_sparrows = np.ceil(len(sparrows) * 0.015).astype(int)
+    new_sparrows = [Sparrow(lattice_size) for _ in range(num_new_sparrows)]
+    for ns in new_sparrows:
+        sparrows.append(ns)
+    rice.grow_rice()
+
 
 anim = animation.FuncAnimation(
     plt.figure(),  # The figure to animate
@@ -65,4 +63,5 @@ anim = animation.FuncAnimation(
 )
 
 # Save the animation to a file
-anim.save("animation.gif", writer="imagemagick")
+# anim.save("animation.gif", writer="imagemagick")
+plt.show()
