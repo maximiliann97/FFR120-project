@@ -12,9 +12,6 @@ class Rice:
         for index, element in enumerate(temp_list):
             self.fields[index, :] = element
 
-
-        
-
     def grow_rice(self):
         self.fields[:, -1] += 1         # Adds one rice grain per day
 

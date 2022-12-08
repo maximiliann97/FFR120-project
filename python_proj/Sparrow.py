@@ -1,6 +1,7 @@
 import numpy as np
 from Rice import Rice
 
+
 class Sparrow:
     def __init__(self, N: int):
         if isinstance(N, int):
