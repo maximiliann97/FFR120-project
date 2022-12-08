@@ -1,5 +1,5 @@
 import numpy as np
-import Rice
+from Rice import Rice
 
 class Sparrow:
     def __init__(self, N: int):
@@ -11,6 +11,7 @@ class Sparrow:
         self.hungry = False
         self.alive = True
         self.days_without_food = 0
+        self.lattice_size = N
         
     def update_hungry(self, hungry):
         if isinstance(hungry, bool):
@@ -24,8 +25,23 @@ class Sparrow:
         else:
             raise TypeError('Needs to take boolean')
 
-    def move(self, direction, grid):
-        return 0
+    def move(self, rice_field_coords):
+        distance, rice_field_index = self.calc_distance(rice_field_coords)
+        distance_limit = 25  # if below this sparrow move to closest rice field, else move randomly
+        if distance < distance_limit:
+            self.position = rice_field_coords[rice_field_index, :]
+        else:
+            directions = ['up', 'down', 'left', 'right']
+            r = np.random.randint(0, 3)
+            direction = directions[r]
+            if direction == 'up' and self.position[1] < self.lattice_size:
+                self.position[1] += 1
+            if direction == 'down' and self.position[1] > 0:
+                self.position[1] -= 1
+            if direction == 'right' and self.position[0] < self.lattice_size:
+                self.position[0] += 1
+            if direction == 'left' and self.position[0] > 0:
+                self.position[0] -= 1
 
     def age(self, day):
         self.age += day
@@ -43,3 +59,19 @@ class Sparrow:
         if self.days_without_food > 5:
             self.alive = False
 
+    def calc_distance(self, rice_field_coords):
+        nFields = len(rice_field_coords)
+        position = np.tile(self.position,(nFields,1))
+        distances = np.linalg.norm(position - rice_field_coords, axis=1)
+        min_distance = np.min(distances)
+        index_min_rice_field = np.where(distances == min_distance)
+        return (min_distance, index_min_rice_field)
+
+N =100
+rice = Rice(N, 20)
+coords = rice.fields[:,0:2]
+print(coords)
+o = Sparrow(N)
+print(o.position)
+o.move(coords)
+print(o.position)

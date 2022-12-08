@@ -26,5 +26,3 @@ class Rice:
 
 
 
-rice = Rice(10, 20)
-print(rice.fields)
