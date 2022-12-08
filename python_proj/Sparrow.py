@@ -35,13 +35,13 @@ class Sparrow:
             directions = ['up', 'down', 'left', 'right']
             r = np.random.randint(0, 4)
             direction = directions[r]
-            if direction == 'up' and self.position[1] < self.lattice_size:
+            if direction == 'up' and self.position[1] > 1:
                 self.position[1] -= 1
-            if direction == 'down' and self.position[1] > 0:
+            if direction == 'down' and self.position[1] < self.lattice_size-1:
                 self.position[1] += 1
-            if direction == 'right' and self.position[0] < self.lattice_size:
+            if direction == 'right' and self.position[0] < self.lattice_size-1:
                 self.position[0] += 1
-            if direction == 'left' and self.position[0] > 0:
+            if direction == 'left' and self.position[0] > 1:
                 self.position[0] -= 1
 
     def age(self, day):
