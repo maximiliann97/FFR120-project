@@ -45,6 +45,7 @@ def main():
         plt.clf()
 
         # Insects eat
+        produced_rice += sum(rice.fields[:, -1])
         amount_rice = sum(rice.fields[:, -1])
         rice.grow_rice()
         n_birthed_birds = np.ceil(len(sparrows) * 0.015).astype(int)
