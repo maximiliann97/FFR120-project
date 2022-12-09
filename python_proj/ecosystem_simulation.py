@@ -19,24 +19,26 @@ start_rice = 20
 rice_growth_per_day = 1
 
 # Initialize
-timesteps = 500
+timesteps = 200
+time = np.linspace(1, 200, 200)
 lattice_size = 100
 nSparrows = 100
-nInsects = 100
+nInsects = 110
 sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold) for _ in range(nSparrows)]
 insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
 rice = Rice(lattice_size, start_rice, rice_growth_per_day)
 
 
 def run_simulation():
+    sparrow_pop = []
+    insect_pop = []
+    rice_pop = []
+
+
     for t in range(timesteps):
-        rice_x = [field[0] for field in rice.fields]
-        rice_y = [field[1] for field in rice.fields]
         rice_field = rice.fields
         rice_coords_array = rice_field[:, 0:2]
 
-        sparrow_x = [sparrow.position[0] for sparrow in sparrows]
-        sparrow_y = [sparrow.position[1] for sparrow in sparrows]
         insect_x = [insect.position[0] for insect in insects]
         insect_y = [insect.position[1] for insect in insects]
         [bird.move(rice_coords_array) for bird in sparrows]
@@ -155,8 +157,18 @@ def run_simulation():
         for ni in new_insects:
             insects.append(ni)
         amount_rice = np.sum(rice.fields[:, -1])
-        print(f'nBirds = {len(sparrows)} rice={amount_rice}, nInsects = {len(insects)} time={t}')
         rice.grow_rice()
+        sparrow_pop.append(len(sparrows))
+        insect_pop.append(len(insects))
+        rice_pop.append(amount_rice)
 
+    plt.plot(time, sparrow_pop)
+    plt.plot(time, insect_pop)
+    plt.plot(time, rice_pop)
+    plt.xlabel('t')
+    plt.ylabel('Population')
+    plt.legend(['Sparrow population', 'Insect population', 'Amount of rice'])
+    plt.title('Time evolution of populations of Sparrows, insects and rice')
+    plt.show()
 
-
+run_simulation()
