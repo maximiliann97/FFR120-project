@@ -5,35 +5,36 @@ from Sparrow import Sparrow
 from Insects import Insects
 from Rice import Rice
 
-# Eco system parameters
-kill_rate = 0.01
 
-sparrow_growth_rate = 0.015
-sparrow_starvation_threshold = 3
-
-insect_growth_rate = 0.015
-insect_starvation_threshold = 4
-insect_age_limit = 90
-
-start_rice = 20
-rice_growth_per_day = 1
-
-# Initialize
-timesteps = 200
-time = np.linspace(1, 200, 200)
-lattice_size = 100
-nSparrows = 100
-nInsects = 110
-sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold) for _ in range(nSparrows)]
-insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
-rice = Rice(lattice_size, start_rice, rice_growth_per_day)
 
 
 def run_simulation():
+    # Eco system parameters
+    kill_rate = 0.01
+
+    sparrow_growth_rate = 0.015
+    sparrow_starvation_threshold = 3
+
+    insect_growth_rate = 0.015
+    insect_starvation_threshold = 4
+    insect_age_limit = 90
+
+    start_rice = 20
+    rice_growth_per_day = 1
+
+    # Initialize
+    timesteps = 200
+    time = np.linspace(1, 200, 200)
+    lattice_size = 100
+    nSparrows = 100
+    nInsects = 110
+    sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold) for _ in range(nSparrows)]
+    insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
+    rice = Rice(lattice_size, start_rice, rice_growth_per_day)
+
     sparrow_pop = []
     insect_pop = []
     rice_pop = []
-
 
     for t in range(timesteps):
         rice_field = rice.fields
@@ -158,10 +159,13 @@ def run_simulation():
             insects.append(ni)
         amount_rice = np.sum(rice.fields[:, -1])
         rice.grow_rice()
+
+        # Add populations to plot
         sparrow_pop.append(len(sparrows))
         insect_pop.append(len(insects))
         rice_pop.append(amount_rice)
 
+    # Plots
     plt.plot(time, sparrow_pop)
     plt.plot(time, insect_pop)
     plt.plot(time, rice_pop)
@@ -170,5 +174,3 @@ def run_simulation():
     plt.legend(['Sparrow population', 'Insect population', 'Amount of rice'])
     plt.title(f'Time evolution of populations of Sparrows, insects and rice \n with killing rate of sparrows = {kill_rate}')
     plt.show()
-
-run_simulation()
