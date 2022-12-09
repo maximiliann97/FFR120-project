@@ -168,7 +168,7 @@ def run_simulation():
     plt.xlabel('t')
     plt.ylabel('Population')
     plt.legend(['Sparrow population', 'Insect population', 'Amount of rice'])
-    plt.title('Time evolution of populations of Sparrows, insects and rice')
+    plt.title(f'Time evolution of populations of Sparrows, insects and rice \n with killing rate of sparrows = {kill_rate}')
     plt.show()
 
 run_simulation()
