@@ -11,6 +11,7 @@ class Insects:
         self.age = 0
         self.hungry = False
         self.alive = True
+        self.old = False
         self.days_without_food = 0
         self.lattice_size = N
 
@@ -44,10 +45,11 @@ class Insects:
             if direction == 'left' and self.position[0] > 1:
                 self.position[0] -= 1
 
-    def age(self, day):
-        self.age += day
+    def aged(self):
+        self.age += 1
         if self.age > 30:
-            self.alive = False
+            self.old = True
+        return self.old
 
     def food(self, food):
         if food:

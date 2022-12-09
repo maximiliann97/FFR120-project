@@ -32,10 +32,10 @@ def update(frame):
     plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10)
     plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50)
     plt.scatter(rice_x, rice_y, c='g', s=500, zorder=-1, marker='s')
-    plt.legend(['Locust', 'Sparrow', 'Rice field'], loc='upper left', bbox_to_anchor=(0.125, 1.1), ncol=3,\
+    plt.legend(['Locust', 'Sparrow', 'Rice field'], loc='upper left', bbox_to_anchor=(0.125, 1.1), ncol=3,
                fancybox=True, shadow=True)
 
-    # Loop through each sparrow
+    # Sparrow eat loop
     for bird in sparrows:
         insects_coords_array = np.array([[x, y] for x, y in zip(insect_x, insect_y)])
         true_rice = np.all(bird.position == rice_coords_array, axis=1)
@@ -115,7 +115,19 @@ def update(frame):
         if not bird.alive:
             sparrows.remove(bird)   # bird dies
 
+    # Insects eat loop
+    for insect in insects:
+        true_rice = np.all(insect.position == rice_coords_array, axis=1)
+        if np.any(true_rice):
+            rice_field_row = np.where(true_rice == True)[0][0]
+            if rice_field[rice_field_row, -1] > 0:
+                insect.food(True)
+                rice.rice_gets_eaten(rice_field_row)
+        else:
+            insect.food(False)
 
+        if insect.aged():
+            insects.remove(insect)
 
 
 
@@ -126,13 +138,13 @@ def update(frame):
         sparrows.append(ns)
 
     # Birth new insects
-    num_new_insects = 2 + np.ceil(len(insects) * 0.03).astype(int)
+    num_new_insects = np.ceil(len(insects) * 0.015).astype(int)
     new_insects = [Insects(lattice_size) for _ in range(num_new_insects)]
     for ni in new_insects:
         insects.append(ni)
-    rice.grow_rice()
     amount_rice = np.sum(rice.fields[:, -1])
-    #print(f'nBirds = {len(sparrows)} rice={amount_rice}, nInsects = {len(insects)}, time={frame}')
+    print(f'nBirds = {len(sparrows)} rice={amount_rice}, nInsects = {len(insects)}, time={frame}')
+    rice.grow_rice()
 
 
 
