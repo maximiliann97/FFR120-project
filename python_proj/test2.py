@@ -26,7 +26,7 @@ def update(frame):
     insect_y = [insect.position[1] for insect in insects]
     [bird.move(rice_coords_array) for bird in sparrows]
     [insect.move(rice_coords_array) for insect in insects]
-
+    insects_coords_array = np.array([[x, y] for x, y in zip(insect_x, insect_y)])
 
     plt.cla()
     plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10)
@@ -37,7 +37,6 @@ def update(frame):
 
     # Loop through each sparrow
     for bird in sparrows:
-        insects_coords_array = np.array([[x, y] for x, y in zip(insect_x, insect_y)])
         true_rice = np.all(bird.position == rice_coords_array, axis=1)
         true_insect = np.all(bird.position == insects_coords_array, axis=1)
         # Check if the bird is at the rice field or at an insect position
@@ -75,9 +74,6 @@ def update(frame):
                 # Set the insect in that position to dead
                 if len(insects) > 0:
                     insects.remove(insects[insect_row])
-                    # Must update coordinates when an insect is removed from population
-                    insect_x = [insect.position[0] for insect in insects]
-                    insect_y = [insect.position[1] for insect in insects]
                     bird.food(True)
                     bird.move_random()
 
@@ -92,26 +88,8 @@ def update(frame):
             else:  # There is no rice
                 bird.food(False)
 
-        # If the bird is not at a rice field but in an insect position
-        elif not np.any(true_rice) and np.any(true_insect):
-            # Find the row in the insects_coords_array where the bird is
-            insect_row = np.where(true_insect == True)[0][0]
-            """
-            print(f'insect index = {insect_row}, length of insects list = {len(insects)}')
-            """
-            # Set the insect in that position to dead
-            if len(insects) > 0:
-                insects.remove(insects[insect_row])
-                # Must update coordinates when an insect is removed from population
-                insect_x = [insect.position[0] for insect in insects]
-                insect_y = [insect.position[1] for insect in insects]
-                bird.food(True)
-                bird.move_random()
-        # No rice or insect
-        else:
+        else:   # No rice or insect
             bird.food(False)
-
-        # Remove birds that died from population
         if not bird.alive:
             sparrows.remove(bird)   # bird dies
 
@@ -131,15 +109,13 @@ def update(frame):
     for ni in new_insects:
         insects.append(ni)
     rice.grow_rice()
-    amount_rice = np.sum(rice.fields[:, -1])
-    #print(f'nBirds = {len(sparrows)} rice={amount_rice}, nInsects = {len(insects)}, time={frame}')
-
+    print(f'nInsects = {len(insects)}')
 
 
 anim = animation.FuncAnimation(
     plt.figure(),  # The figure to animate
     update,  # The frame-generating function
-    frames=5000,  # The number of frames in the animation
+    frames=100,  # The number of frames in the animation
     interval=100  # The interval between frames, in milliseconds
 )
 
