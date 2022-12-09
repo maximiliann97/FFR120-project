@@ -1,7 +1,7 @@
 import numpy as np
 
 class Rice:
-    def __init__(self, N, amount_rice):
+    def __init__(self, N, amount_rice, rice_growth):
         center = np.array([N//2, N//2, amount_rice])
         upper_left = np.array([0, 0, amount_rice])
         upper_right = np.array([0, N, amount_rice])
@@ -11,9 +11,9 @@ class Rice:
         self.fields = np.zeros([len(temp_list), 3])
         for index, element in enumerate(temp_list):
             self.fields[index, :] = element
-
+        self.rice_growth = rice_growth
     def grow_rice(self):
-        self.fields[:, -1] += 1         # Adds one rice grain per day
+        self.fields[:, -1] += self.rice_growth
 
     def rice_gets_eaten(self, plant: int):
         # if animal == "Sparrow":

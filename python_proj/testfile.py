@@ -15,13 +15,16 @@ insect_growth_rate = 0.015
 insect_starvation_threshold = 4
 insect_age_limit = 90
 
+start_rice = 20
+rice_growth = 1
+
 # Initialize
 lattice_size = 100
 nSparrows = 100
 nInsects = 100
 sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold) for _ in range(nSparrows)]
 insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
-rice = Rice(lattice_size, 20)
+rice = Rice(lattice_size, start_rice, rice_growth)
 
 
 def update(frame):
