@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="003a4b4f-4231-4690-ad78-03c45c3ffa00" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/animation.gif" beforeDir="false" afterPath="$PROJECT_DIR$/animation.gif" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Sparrow.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sparrow.py" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/testfile.py" beforeDir="false" afterPath="$PROJECT_DIR$/testfile.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

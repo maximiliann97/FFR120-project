@@ -1,4 +1,3 @@
-import random
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.animation as animation
@@ -18,14 +17,14 @@ def update(frame):
     rice_x = [field[0] for field in rice.fields]
     rice_y = [field[1] for field in rice.fields]
     rice_field = rice.fields
-    rice_coords = rice_field[:, 0:2]
+    rice_coords_array = rice_field[:, 0:2]
 
     sparrow_x = [sparrow.position[0] for sparrow in sparrows]
     sparrow_y = [sparrow.position[1] for sparrow in sparrows]
     insect_x = [insect.position[0] for insect in insects]
     insect_y = [insect.position[1] for insect in insects]
-    [bird.move(rice_coords) for bird in sparrows]
-    [insect.move(rice_coords) for insect in insects]
+    [bird.move(rice_coords_array) for bird in sparrows]
+    [insect.move(rice_coords_array) for insect in insects]
 
     plt.cla()
     plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50)
@@ -34,16 +33,36 @@ def update(frame):
     plt.title(f'Time step = {frame}')
 
     for bird in sparrows:        # Birds eat
-        true_array = np.all(bird.position == rice_coords, axis=1)
-        if True in true_array:  # If bird at rice field
-            rice_field_row = np.where(true_array == True)[0][0]
-            if rice_field[rice_field_row, -1] > 0:
+        true_rice = np.all(bird.position == rice_coords_array, axis=1)
+        true_insect = np.all(bird.position == insects_coords_array, axis=1)
+
+        if True in true_rice and True in true_insect:  # If bird at rice field and insect position
+            r = np.random.rand()
+            if r < 0.5:     # Bird eats rice
+                rice_field_row = np.where(true_rice == True)[0][0]
+                if rice_field[rice_field_row, -1] > 0:  # There is rice to eat
+                    bird.food(True)
+                    bird.move_random()
+                    rice.rice_gets_eaten(rice_field_row)
+                else:       # There is no rice but still an insect
+                    bird.food(True)
+                    bird.move_random()
+                    # Should eat insect here and change insect to dead
+            else:
+                bird.food(True)
+                bird.move_random()
+                # Should eat insect here and change insect to dead
+
+        elif True in true_rice and not True in true_insect:     # There is rice in position but not insect
+            rice_field_row = np.where(true_rice == True)[0][0]
+            if rice_field[rice_field_row, -1] > 0:  # There is rice to eat
                 bird.food(True)
                 bird.move_random()
                 rice.rice_gets_eaten(rice_field_row)
-            else:
+            else:  # There is no rice
                 bird.food(False)
-        else:
+
+        else:   # No rice or insect
             bird.food(False)
         if not bird.alive:
             sparrows.remove(bird)   # bird dies
