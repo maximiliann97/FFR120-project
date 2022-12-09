@@ -97,12 +97,11 @@ def update(frame):
             if len(insects) > 0:
                 insects.remove(insects[insect_row])
                 bird.food(True)
-                bird.move_random()
 
         # No rice or insect
         else:
             bird.food(False)
-            
+
         # Remove birds that died from population
         if not bird.alive:
             sparrows.remove(bird)   # bird dies
