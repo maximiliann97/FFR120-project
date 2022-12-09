@@ -61,7 +61,7 @@ class Insects:
 
     def calc_distance(self, rice_field_coords):
         nFields = len(rice_field_coords)
-        position = np.tile(self.position,(nFields,1))
+        position = np.tile(self.position, (nFields,1))
         distances = np.linalg.norm(position - rice_field_coords, axis=1)
         min_distance = np.min(distances)
         index_min_rice_field = np.where(distances == min_distance)
