@@ -7,7 +7,7 @@ from Rice import Rice
 
 lattice_size = 100
 nSparrows = 100
-nInsects = 50
+nInsects = 100
 sparrows = [Sparrow(lattice_size) for _ in range(nSparrows)]
 insects = [Insects(lattice_size) for _ in range(nInsects)]
 rice = Rice(lattice_size, 20)
@@ -29,9 +29,11 @@ def update(frame):
     insects_coords_array = np.array([[x, y] for x, y in zip(insect_x, insect_y)])
 
     plt.cla()
-    plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50)
     plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10)
+    plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50)
     plt.scatter(rice_x, rice_y, c='g', s=500, zorder=-1, marker='s')
+    plt.legend(['Locust', 'Sparrow', 'Rice field'], loc='upper left', bbox_to_anchor=(0.125, 1.1), ncol=3,\
+               fancybox=True, shadow=True)
 
     # Loop through each sparrow
     for bird in sparrows:
@@ -63,7 +65,6 @@ def update(frame):
                     # Remove insect from list
                     if len(insects) > 0:
                         insects.remove(insects[insect_row])
-                        print(len(insects))
                         bird.food(True)
                         bird.move_random()
             else:
@@ -73,7 +74,6 @@ def update(frame):
                 # Set the insect in that position to dead
                 if len(insects) > 0:
                     insects.remove(insects[insect_row])
-                    print(len(insects))
                     bird.food(True)
                     bird.move_random()
 
@@ -102,7 +102,14 @@ def update(frame):
     new_sparrows = [Sparrow(lattice_size) for _ in range(num_new_sparrows)]
     for ns in new_sparrows:
         sparrows.append(ns)
+
+    # Birth new insects
+    num_new_insects = 2 + np.ceil(len(insects) * 0.03).astype(int)
+    new_insects = [Insects(lattice_size) for _ in range(num_new_insects)]
+    for ni in new_insects:
+        insects.append(ni)
     rice.grow_rice()
+    print(f'nInsects = {len(insects)}')
 
 
 anim = animation.FuncAnimation(
