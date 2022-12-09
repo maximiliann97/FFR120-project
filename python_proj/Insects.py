@@ -3,16 +3,19 @@ import matplotlib.pyplot as plt
 
 
 class Insects:
-    def __init__(self, N: int):
+    def __init__(self, N: int, food_threshold, age_limit):
         if isinstance(N, int):
             self.position = np.random.randint(1, N+1, 2)
         else:
             raise TypeError('Needs to take integer')
         self.age = 0
+        self.age_limit = age_limit
         self.hungry = False
         self.alive = True
+        self.old = False
         self.days_without_food = 0
         self.lattice_size = N
+        self.food_threshold = food_threshold
 
     def update_hungry(self, hungry):
         if isinstance(hungry, bool):
@@ -44,10 +47,11 @@ class Insects:
             if direction == 'left' and self.position[0] > 1:
                 self.position[0] -= 1
 
-    def age(self, day):
-        self.age += day
-        if self.age > 30:
-            self.alive = False
+    def aged(self):
+        self.age += 1
+        if self.age > self.age_limit:
+            self.old = True
+        return self.old
 
     def food(self, food):
         if food:
@@ -56,12 +60,12 @@ class Insects:
         else:
             self.update_hungry(True)
             self.days_without_food += 1
-        if self.days_without_food == 5:
+        if self.days_without_food > self.food_threshold:
             self.alive = False
 
     def calc_distance(self, rice_field_coords):
         nFields = len(rice_field_coords)
-        position = np.tile(self.position,(nFields,1))
+        position = np.tile(self.position, (nFields, 1))
         distances = np.linalg.norm(position - rice_field_coords, axis=1)
         min_distance = np.min(distances)
         index_min_rice_field = np.where(distances == min_distance)
