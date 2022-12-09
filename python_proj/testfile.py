@@ -88,6 +88,17 @@ def update(frame):
             else:  # There is no rice
                 bird.food(False)
 
+        # If the bird is not at a rice field but in an insect position
+        elif not np.any(true_rice) and np.any(true_insect):
+            # Find the row in the insects_coords_array where the bird is
+            insect_row = np.where(true_insect == True)[0][0]
+
+            # Set the insect in that position to dead
+            if len(insects) > 0:
+                insects.remove(insects[insect_row])
+                bird.food(True)
+                bird.move_random()
+
         else:   # No rice or insect
             bird.food(False)
         if not bird.alive:
