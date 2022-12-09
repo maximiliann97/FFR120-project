@@ -135,8 +135,12 @@ def update(frame):
         if insect.aged():
             insects.remove(insect)
 
+   
+    """
     # Pest control
     n_dead_sparrows = np.ceil(kill_rate * len(sparrows)).astype(int)
+    """
+
     # Birth new sparrows
     num_new_sparrows = np.ceil(len(sparrows) * sparrow_growth_rate).astype(int)
     new_sparrows = [Sparrow(lattice_size) for _ in range(num_new_sparrows)]

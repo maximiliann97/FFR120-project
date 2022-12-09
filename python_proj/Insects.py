@@ -47,7 +47,7 @@ class Insects:
 
     def aged(self):
         self.age += 1
-        if self.age > 30:
+        if self.age > 90:
             self.old = True
         return self.old
 
