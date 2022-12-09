@@ -29,9 +29,9 @@ def update(frame):
 
 
     plt.cla()
-    plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10)
-    plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50)
-    plt.scatter(rice_x, rice_y, c='g', s=500, zorder=-1, marker='s')
+    plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10, zorder=3)
+    plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50, zorder=2)
+    plt.scatter(rice_x, rice_y, c='g', s=500, zorder=1, marker='s')
     plt.legend(['Locust', 'Sparrow', 'Rice field'], loc='upper left', bbox_to_anchor=(0.125, 1.1), ncol=3,
                fancybox=True, shadow=True)
 
