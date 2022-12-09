@@ -26,14 +26,12 @@ def update(frame):
     insect_y = [insect.position[1] for insect in insects]
     [bird.move(rice_coords_array) for bird in sparrows]
     [insect.move(rice_coords_array) for insect in insects]
+    insects_coords_array = np.array([[x, y] for x, y in zip(insect_x, insect_y)])
 
     plt.cla()
     plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50)
     plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10)
     plt.scatter(rice_x, rice_y, c='g', s=500, zorder=-1, marker='s')
-
-    sparrows_coords_array = np.array([[x, y] for x, y in zip(sparrow_x, sparrow_y)])
-    insects_coords_array = np.array([[x, y] for x, y in zip(insect_x, insect_y)])
 
     # Loop through each sparrow
     for bird in sparrows:
