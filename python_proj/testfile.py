@@ -123,13 +123,16 @@ def update(frame):
     for ni in new_insects:
         insects.append(ni)
     rice.grow_rice()
-    print(f'nInsects = {len(insects)}')
+
+    amount_rice = np.sum(rice.fields[:,-1])
+    print(f'nBirds = {len(sparrows)} rice={amount_rice}, nInsects = {len(insects)}, time={frame}')
+
 
 
 anim = animation.FuncAnimation(
     plt.figure(),  # The figure to animate
     update,  # The frame-generating function
-    frames=100,  # The number of frames in the animation
+    frames=5000,  # The number of frames in the animation
     interval=100  # The interval between frames, in milliseconds
 )
 
