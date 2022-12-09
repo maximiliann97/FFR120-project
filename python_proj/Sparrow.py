@@ -44,7 +44,7 @@ class Sparrow:
             if direction == 'left' and self.position[0] > 1:
                 self.position[0] -= 1
 
-    def age(self, day):
+    def aged(self, day):
         self.age += day
         if self.age > 365*2:
             self.alive = False
