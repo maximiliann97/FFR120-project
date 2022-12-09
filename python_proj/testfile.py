@@ -9,12 +9,14 @@ from Rice import Rice
 lattice_size = 100
 nSparrows = 100
 nInsects = 50
+amount_of_rice = 20
 sparrows = [Sparrow(lattice_size) for _ in range(nSparrows)]
 insects = [Insects(lattice_size) for _ in range(nInsects)]
-rice = Rice(lattice_size, 20)
+rice = Rice(lattice_size, amount_of_rice)
+produced_rice = 0
+
 
 def update(frame):
-    produced_rice = 0
     rice_x = [field[0] for field in rice.fields]
     rice_y = [field[1] for field in rice.fields]
     rice_field = rice.fields
@@ -28,10 +30,13 @@ def update(frame):
     [insect.move(rice_coords) for insect in insects]
 
     plt.cla()
+    plt.scatter(rice_x, rice_y, c='g', s=500, zorder=-1, marker='s')
     plt.scatter(sparrow_x, sparrow_y, c='black', marker='^', s=50)
     plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10)
-    plt.scatter(rice_x, rice_y, c='g', s=500, zorder=-1, marker='s')
     plt.title(f'Time step = {frame}')
+
+    sparrows_coords_array = np.array([[x, y] for x, y in zip(sparrow_x, sparrow_y)])
+    insects_coords_array = np.array([[x, y] for x, y in zip(insect_x, insect_y)])
 
     for bird in sparrows:        # Birds eat
         true_array = np.all(bird.position == rice_coords, axis=1)
