@@ -12,6 +12,7 @@ sparrows = [Sparrow(lattice_size) for _ in range(nSparrows)]
 insects = [Insects(lattice_size) for _ in range(nInsects)]
 rice = Rice(lattice_size, 20)
 
+
 def update(frame):
     produced_rice = 0
     rice_x = [field[0] for field in rice.fields]
@@ -36,8 +37,10 @@ def update(frame):
 
     # Loop through each sparrow
     for bird in sparrows:
+        true_rice = np.all(bird.position == rice_coords_array, axis=1)
+        true_insect = np.all(bird.position == insects_coords_array, axis=1)
         # Check if the bird is at the rice field or at an insect position
-        if np.any(np.all(bird.position == rice_coords_array, axis=1)) and np.any(np.all(bird.position == insects_coords_array, axis=1)):
+        if np.any(true_rice) and np.any(true_insect):
 
             # Generate a random number
             r = np.random.rand()
@@ -46,7 +49,7 @@ def update(frame):
             if r < 0.5:
 
                 # Find the row in the rice field where the bird is
-                rice_field_row = np.where(np.all(bird.position == rice_coords_array, axis=1))[0][0]
+                rice_field_row = np.where(true_rice == True)[0][0]
 
                 # If there is rice at that location, feed the bird and move it to a new location
                 if rice_field[rice_field_row, -1] > 0:
@@ -57,7 +60,7 @@ def update(frame):
                 # If the random number is not less than 0.5, feed the bird with an insect
                 else:
                     # Find the row in the insects_coords_array where the bird is
-                    insect_row = np.where(np.all(bird.position == insects_coords_array, axis=1))[0][0]
+                    insect_row = np.where(true_insect == True)[0][0]
 
                     # Remove insect from list
                     if len(insects) > 0:
@@ -67,7 +70,7 @@ def update(frame):
                         bird.move_random()
             else:
                 # Find the row in the insects_coords_array where the bird is
-                insect_row = np.where(np.all(bird.position == insects_coords_array, axis=1))[0][0]
+                insect_row = np.where(true_insect == True)[0][0]
 
                 # Set the insect in that position to dead
                 if len(insects) > 0:
@@ -77,9 +80,8 @@ def update(frame):
                     bird.move_random()
 
         # If the bird is at the rice field but not at an insect position
-        elif np.any(np.all(bird.position == rice_coords_array, axis=1)) and not np.any(
-            np.all(bird.position == insects_coords_array, axis=1)):
-            rice_field_row = np.where(np.all(bird.position == rice_coords_array, axis=1))[0][0]
+        elif np.any(true_rice) and not np.any(true_insect):
+            rice_field_row = np.where(true_rice == True)[0][0]
 
             if rice_field[rice_field_row, -1] > 0:  # There is rice to eat
                 bird.food(True)
@@ -94,6 +96,10 @@ def update(frame):
             sparrows.remove(bird)   # bird dies
 
 
+
+
+
+    # Birth new sparrows
     num_new_sparrows = np.ceil(len(sparrows) * 0.015).astype(int)
     new_sparrows = [Sparrow(lattice_size) for _ in range(num_new_sparrows)]
     for ns in new_sparrows:
