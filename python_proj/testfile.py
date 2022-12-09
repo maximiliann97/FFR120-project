@@ -7,15 +7,20 @@ from Rice import Rice
 
 # Eco system parameters
 kill_rate = 0.01
+
 sparrow_growth_rate = 0.015
+sparrow_starvation_threshold = 3
+
 insect_growth_rate = 0.015
+insect_starvation_threshold = 4
+insect_age_limit = 90
 
 # Initialize
 lattice_size = 100
 nSparrows = 100
 nInsects = 100
-sparrows = [Sparrow(lattice_size) for _ in range(nSparrows)]
-insects = [Insects(lattice_size) for _ in range(nInsects)]
+sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold) for _ in range(nSparrows)]
+insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
 rice = Rice(lattice_size, 20)
 
 
@@ -31,7 +36,6 @@ def update(frame):
     insect_y = [insect.position[1] for insect in insects]
     [bird.move(rice_coords_array) for bird in sparrows]
     [insect.move(rice_coords_array) for insect in insects]
-
 
     plt.cla()
     plt.scatter(insect_x, insect_y, marker="^", c="lightgreen", s=10, zorder=3)
@@ -135,7 +139,7 @@ def update(frame):
         if insect.aged():
             insects.remove(insect)
 
-   
+
     """
     # Pest control
     n_dead_sparrows = np.ceil(kill_rate * len(sparrows)).astype(int)
@@ -143,14 +147,14 @@ def update(frame):
 
     # Birth new sparrows
     num_new_sparrows = np.ceil(len(sparrows) * sparrow_growth_rate).astype(int)
-    new_sparrows = [Sparrow(lattice_size) for _ in range(num_new_sparrows)]
+    new_sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold) for _ in range(num_new_sparrows)]
 
     for ns in new_sparrows:
         sparrows.append(ns)
 
     # Birth new insects
     num_new_insects = np.ceil(len(insects) * insect_growth_rate).astype(int)
-    new_insects = [Insects(lattice_size) for _ in range(num_new_insects)]
+    new_insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(num_new_insects)]
     for ni in new_insects:
         insects.append(ni)
     amount_rice = np.sum(rice.fields[:, -1])

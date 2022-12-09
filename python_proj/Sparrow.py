@@ -2,7 +2,7 @@ import numpy as np
 
 
 class Sparrow:
-    def __init__(self, N: int):
+    def __init__(self, N: int, food_threshold):
         if isinstance(N, int):
             self.position = np.random.randint(1, N+1, 2)
         else:
@@ -12,6 +12,7 @@ class Sparrow:
         self.alive = True
         self.days_without_food = 0
         self.lattice_size = N
+        self.food_threshold = food_threshold
         
     def update_hungry(self, hungry):
         if isinstance(hungry, bool):
@@ -45,7 +46,7 @@ class Sparrow:
 
     def age(self, day):
         self.age += day
-        if self.age > 365 * 2:
+        if self.age > 365*2:
             self.alive = False
 
     def food(self, food):
@@ -56,7 +57,7 @@ class Sparrow:
             self.update_hungry(True)
             self.days_without_food += 1
 
-        if self.days_without_food > 3:
+        if self.days_without_food > self.food_threshold:
             self.alive = False
 
     def calc_distance(self, rice_field_coords):
