@@ -56,7 +56,7 @@ class Sparrow:
             self.update_hungry(True)
             self.days_without_food += 1
 
-        if self.days_without_food > 10:
+        if self.days_without_food > 3:
             self.alive = False
 
     def calc_distance(self, rice_field_coords):
