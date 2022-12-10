@@ -8,7 +8,7 @@ from tqdm import trange
 
 def run_simulation():
     # Eco system parameters
-    kill_rate = 0.0
+    kill_rate = 0.1
 
     sparrow_growth_rate = 0.025
     sparrow_starvation_threshold = 3
@@ -30,7 +30,6 @@ def run_simulation():
     nSparrows = 200
     nInsects = 100
     sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold, sparrow_age_limit) for _ in range(nSparrows)]
-    # sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold, sparrow_age_limit)]
     insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
     rice = Rice(lattice_size, start_rice, rice_growth_per_day)
 
@@ -42,7 +41,6 @@ def run_simulation():
     sparrow_pop.append(len(sparrows))
     insect_pop.append(len(insects))
     rice_pop.append(np.sum(rice.fields[:, -1]))
-
 
     for t in trange(timesteps):
         rice_field = rice.fields
