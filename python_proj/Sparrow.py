@@ -2,7 +2,7 @@ import numpy as np
 
 
 class Sparrow:
-    def __init__(self, N: int, food_threshold):
+    def __init__(self, N: int, food_threshold,age_limit):
         if isinstance(N, int):
             self.position = np.random.randint(1, N+1, 2)
         else:
@@ -13,6 +13,7 @@ class Sparrow:
         self.days_without_food = 0
         self.lattice_size = N
         self.food_threshold = food_threshold
+        self.age_limit = age_limit
         
     def update_hungry(self, hungry):
         if isinstance(hungry, bool):
@@ -46,7 +47,7 @@ class Sparrow:
 
     def aged(self, day):
         self.age += day
-        if self.age > 365*2:
+        if self.age > self.age_limit:
             self.alive = False
 
     def food(self, food):
