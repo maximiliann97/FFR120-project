@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="003a4b4f-4231-4690-ad78-03c45c3ffa00" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Figure 1 2022-12-08 20-36-08.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Figure 1 2022-12-08 20-36-08.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/animation.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Images/animation.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/figure 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/figure 1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rice.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecosystem_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecosystem_simulation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +32,11 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Maximilian/Documents/MATLAB/Simulation of Complex System Project/FFR120-project/python_proj&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maximilian\Documents\MATLAB\Simulation of Complex System Project\FFR120-project\python_proj\Images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

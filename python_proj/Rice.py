@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Rice:
     def __init__(self, N, amount_rice, rice_growth):
         center = np.array([N//2, N//2, amount_rice])
@@ -12,6 +13,7 @@ class Rice:
         for index, element in enumerate(temp_list):
             self.fields[index, :] = element
         self.rice_growth = rice_growth
+
     def grow_rice(self):
         self.fields[:, -1] += self.rice_growth
 

@@ -13,11 +13,11 @@ def run_simulation():
 
     sparrow_growth_rate = 0.015
     sparrow_starvation_threshold = 3
-    sparrow_age_limit = 365 * 2
+    sparrow_age_limit = 75
 
     insect_growth_rate = 0.015
     insect_starvation_threshold = 4
-    insect_age_limit = 90
+    insect_age_limit = 75
 
 
     start_rice = 200
@@ -65,7 +65,7 @@ def run_simulation():
                     r = np.random.rand()
 
                     # If the random number is less than 0.5, feed the bird with rice
-                    if r < 0.1:
+                    if r < 0.5:
 
                         # Find the row in the rice field where the bird is
                         rice_field_row = np.where(true_rice == True)[0][0]
