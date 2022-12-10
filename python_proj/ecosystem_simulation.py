@@ -4,8 +4,7 @@ import matplotlib.animation as animation
 from Sparrow import Sparrow
 from Insects import Insects
 from Rice import Rice
-
-
+from tqdm import trange
 
 
 def run_simulation():
@@ -14,22 +13,23 @@ def run_simulation():
 
     sparrow_growth_rate = 0.015
     sparrow_starvation_threshold = 3
+    sparrow_age_limit = 365 * 2
 
     insect_growth_rate = 0.015
     insect_starvation_threshold = 4
     insect_age_limit = 90
-    sparrow_age_limit = 360*2
+
 
     start_rice = 200
-    rice_growth_per_day = 1
+    rice_growth_per_day = 50
 
     # Initialize
-    timesteps = 200
-    time = np.linspace(0, 200, 201)
+    timesteps = 500
+    time = np.linspace(0, timesteps, timesteps+1)
     lattice_size = 100
     nSparrows = 100
     nInsects = 110
-    sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold,sparrow_age_limit) for _ in range(nSparrows)]
+    sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold, sparrow_age_limit) for _ in range(nSparrows)]
     insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
     rice = Rice(lattice_size, start_rice, rice_growth_per_day)
 
@@ -37,13 +37,13 @@ def run_simulation():
     insect_pop = []
     rice_pop = []
 
-    #Add populations at timestep 0
+    # Add populations at timestep 0
     sparrow_pop.append(len(sparrows))
     insect_pop.append(len(insects))
     rice_pop.append(np.sum(rice.fields[:, -1]))
 
 
-    for t in range(timesteps):
+    for t in trange(timesteps):
         rice_field = rice.fields
         rice_coords_array = rice_field[:, 0:2]
 
@@ -65,7 +65,7 @@ def run_simulation():
                     r = np.random.rand()
 
                     # If the random number is less than 0.5, feed the bird with rice
-                    if r < 0.5:
+                    if r < 0.1:
 
                         # Find the row in the rice field where the bird is
                         rice_field_row = np.where(true_rice == True)[0][0]
@@ -194,4 +194,5 @@ def run_simulation():
     plt.ylabel('Population')
     plt.legend(['Sparrow population', 'Insect population', 'Amount of rice'])
     plt.title(f'Time evolution of populations of Sparrows, insects and rice \n with killing rate of sparrows = {kill_rate}')
+    plt.gca()
     plt.show()
