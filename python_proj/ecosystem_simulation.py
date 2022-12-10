@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.animation as animation
 from Sparrow import Sparrow
 from Insects import Insects
 from Rice import Rice
@@ -19,17 +18,16 @@ def run_simulation():
     insect_starvation_threshold = 4
     insect_age_limit = 75
 
-
-    start_rice = 200
+    start_rice = 400
     rice_growth_per_day = 50
-
-    rice_vs_insect_prob = 0.5
+    rice_vs_insect_prob = 0.1
+    
     # Initialize
     timesteps = 500
     time = np.linspace(0, timesteps, timesteps+1)
     lattice_size = 100
     nSparrows = 100
-    nInsects = 110
+    nInsects = 100
     sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold, sparrow_age_limit) for _ in range(nSparrows)]
     insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
     rice = Rice(lattice_size, start_rice, rice_growth_per_day)
@@ -75,7 +73,7 @@ def run_simulation():
                         if rice_field[rice_field_row, -1] > 0:
                             bird.food(True)
                             bird.move_random()
-                            rice.rice_gets_eaten(rice_field_row)
+                            rice.rice_gets_eaten(rice_field_row, "sparrow")
 
                         # If there is no rice at the rice field eat insect
                         else:
@@ -111,7 +109,7 @@ def run_simulation():
                             if rice_field[rice_field_row, -1] > 0:
                                 bird.food(True)
                                 bird.move_random()
-                                rice.rice_gets_eaten(rice_field_row)
+                                rice.rice_gets_eaten(rice_field_row, "sparrow")
 
                 # If the bird is at the rice field but not at an insect position
                 elif np.any(true_rice) and not np.any(true_insect):
@@ -120,7 +118,7 @@ def run_simulation():
                     if rice_field[rice_field_row, -1] > 0:  # There is rice to eat
                         bird.food(True)
                         bird.move_random()
-                        rice.rice_gets_eaten(rice_field_row)
+                        rice.rice_gets_eaten(rice_field_row, "sparrow")
                     else:  # There is no rice
                         bird.food(False)
 
@@ -154,18 +152,16 @@ def run_simulation():
                 rice_field_row = np.where(true_rice == True)[0][0]
                 if rice_field[rice_field_row, -1] > 0:
                     insect.food(True)
-                    rice.rice_gets_eaten(rice_field_row)
+                    rice.rice_gets_eaten(rice_field_row, "insect")
             else:
                 insect.food(False)
 
             if insect.aged():
                 insects.remove(insect)
 
-
-        """
         # Pest control
-        n_dead_sparrows = np.ceil(kill_rate * len(sparrows)).astype(int)
-        """
+        n_dead_sparrows = np.round(kill_rate * len(sparrows)).astype(int)
+        del sparrows[0:n_dead_sparrows]
 
         # Birth new sparrows
         num_new_sparrows = np.ceil(len(sparrows) * sparrow_growth_rate).astype(int)
