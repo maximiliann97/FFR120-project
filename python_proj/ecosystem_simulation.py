@@ -214,4 +214,3 @@ def run_simulation():
     plt.ylabel('Amount of rice')
     plt.title(f'Time evolution of amount of rice \n with killing rate of sparrows = {kill_rate}')
     plt.gca()
-    plt.show()
