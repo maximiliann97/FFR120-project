@@ -23,6 +23,7 @@ def run_simulation():
     start_rice = 200
     rice_growth_per_day = 50
 
+    rice_vs_insect_prob = 0.5
     # Initialize
     timesteps = 500
     time = np.linspace(0, timesteps, timesteps+1)
@@ -65,7 +66,7 @@ def run_simulation():
                     r = np.random.rand()
 
                     # If the random number is less than 0.5, feed the bird with rice
-                    if r < 0.5:
+                    if r < rice_vs_insect_prob:
 
                         # Find the row in the rice field where the bird is
                         rice_field_row = np.where(true_rice == True)[0][0]
