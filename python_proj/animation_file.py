@@ -31,7 +31,6 @@ def run_animation():
     insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
     rice = Rice(lattice_size, start_rice, rice_growth_per_day)
 
-
     def update(frame):
         rice_x = [field[0] for field in rice.fields]
         rice_y = [field[1] for field in rice.fields]
@@ -199,7 +198,7 @@ def run_animation():
     anim = animation.FuncAnimation(
         plt.figure(),  # The figure to animate
         update,  # The frame-generating function
-        frames=5000,  # The number of frames in the animation
+        frames=1000,  # The number of frames in the animation
         interval=100  # The interval between frames, in milliseconds
     )
 
