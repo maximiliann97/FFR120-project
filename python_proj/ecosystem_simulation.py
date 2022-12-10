@@ -15,7 +15,7 @@ def run_simulation():
     sparrow_age_limit = 75
 
     insect_growth_rate = 0.015
-    insect_starvation_threshold = 4
+    insect_starvation_threshold = 3
     insect_age_limit = 75
     insect_emerge_prob = 0.2
 
@@ -24,7 +24,7 @@ def run_simulation():
     rice_vs_insect_prob = 0.1
 
     # Initialize
-    timesteps = 1000
+    timesteps = 5000
     time = np.linspace(0, timesteps, timesteps+1)
     lattice_size = 100
     nSparrows = 200
