@@ -20,7 +20,7 @@ def run_simulation():
     insect_age_limit = 90
     sparrow_age_limit = 360*2
 
-    start_rice = 20
+    start_rice = 200
     rice_growth_per_day = 1
 
     # Initialize
@@ -101,6 +101,16 @@ def run_simulation():
                             insect_y = [insect.position[1] for insect in insects]
                             bird.food(True)
                             bird.move_random()
+
+                        else:
+                            # Find the row in the rice field where the bird is
+                            rice_field_row = np.where(true_rice == True)[0][0]
+
+                            # If there is rice at that location, feed the bird and move it to a new location
+                            if rice_field[rice_field_row, -1] > 0:
+                                bird.food(True)
+                                bird.move_random()
+                                rice.rice_gets_eaten(rice_field_row)
 
                 # If the bird is at the rice field but not at an insect position
                 elif np.any(true_rice) and not np.any(true_insect):
