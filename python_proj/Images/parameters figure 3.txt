@@ -1,0 +1,22 @@
+# Eco system parameters
+    kill_rate = 0.0
+
+    sparrow_growth_rate = 0.025
+    sparrow_starvation_threshold = 3
+    sparrow_age_limit = 75
+
+    insect_growth_rate = 0.015
+    insect_starvation_threshold = 4
+    insect_age_limit = 75
+    insect_emerge_prob = 0.2
+
+    start_rice = 1000
+    rice_growth_per_day = 50
+    rice_vs_insect_prob = 0.1
+
+    # Initialize
+    timesteps = 1000
+    time = np.linspace(0, timesteps, timesteps+1)
+    lattice_size = 100
+    nSparrows = 200
+    nInsects = 100

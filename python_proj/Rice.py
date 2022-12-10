@@ -19,7 +19,7 @@ class Rice:
 
     def rice_gets_eaten(self, plant: int, animal):
         if animal == "sparrow":
-            self.fields[plant, -1] -= 2  # Rice gets eaten
+            self.fields[plant, -1] -= 5  # Rice gets eaten
         if animal == "insect":
             self.fields[plant, -1] -= 10  # Rice gets eat
         if self.fields[plant, -1] < 0:

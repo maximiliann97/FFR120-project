@@ -8,27 +8,29 @@ from tqdm import trange
 
 def run_simulation():
     # Eco system parameters
-    kill_rate = 0.01
+    kill_rate = 0.0
 
-    sparrow_growth_rate = 0.015
+    sparrow_growth_rate = 0.025
     sparrow_starvation_threshold = 3
     sparrow_age_limit = 75
 
     insect_growth_rate = 0.015
     insect_starvation_threshold = 4
     insect_age_limit = 75
+    insect_emerge_prob = 0.2
 
-    start_rice = 400
+    start_rice = 1000
     rice_growth_per_day = 50
     rice_vs_insect_prob = 0.1
-    
+
     # Initialize
-    timesteps = 500
+    timesteps = 1000
     time = np.linspace(0, timesteps, timesteps+1)
     lattice_size = 100
-    nSparrows = 100
+    nSparrows = 200
     nInsects = 100
     sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold, sparrow_age_limit) for _ in range(nSparrows)]
+    # sparrows = [Sparrow(lattice_size, sparrow_starvation_threshold, sparrow_age_limit)]
     insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
     rice = Rice(lattice_size, start_rice, rice_growth_per_day)
 
@@ -77,14 +79,17 @@ def run_simulation():
 
                         # If there is no rice at the rice field eat insect
                         else:
-                            # Find the row in the insects_coords_array where the bird is
-                            insect_row = np.where(true_insect == True)[0][0]
+                            try:
+                                # Find the row in the insects_coords_array where the bird is
+                                insect_row = np.where(true_insect == True)[0][0]
 
-                            # Remove insect from list
-                            if len(insects) > 0:
-                                insects.remove(insects[insect_row])
-                                bird.food(True)
-                                bird.move_random()
+                                # Remove insect from list
+                                if len(insects) > 0:
+                                    insects.remove(insects[insect_row])
+                                    bird.food(True)
+                                    bird.move_random()
+                            except IndexError:
+                                pass
 
                     # If the random number is not less than 0.5, feed the bird with an insect
                     else:
@@ -94,12 +99,15 @@ def run_simulation():
 
                         # Set the insect in that position to dead
                         if len(insects) > 0:
-                            insects.remove(insects[insect_row])
-                            # Must update coordinates when an insect is removed from population
-                            insect_x = [insect.position[0] for insect in insects]
-                            insect_y = [insect.position[1] for insect in insects]
-                            bird.food(True)
-                            bird.move_random()
+                            try:
+                                insects.remove(insects[insect_row])
+                                # Must update coordinates when an insect is removed from population
+                                insect_x = [insect.position[0] for insect in insects]
+                                insect_y = [insect.position[1] for insect in insects]
+                                bird.food(True)
+                                bird.move_random()
+                            except IndexError:
+                                pass
 
                         else:
                             # Find the row in the rice field where the bird is
@@ -141,6 +149,7 @@ def run_simulation():
                 else:
                     bird.food(False)
 
+            bird.aged()       # bird ages
             # Remove birds that died from population
             if not bird.alive:
                 sparrows.remove(bird)   # bird dies
@@ -153,6 +162,7 @@ def run_simulation():
                 if rice_field[rice_field_row, -1] > 0:
                     insect.food(True)
                     rice.rice_gets_eaten(rice_field_row, "insect")
+                    #insect.move_random()
             else:
                 insect.food(False)
 
@@ -160,7 +170,7 @@ def run_simulation():
                 insects.remove(insect)
 
         # Pest control
-        n_dead_sparrows = np.round(kill_rate * len(sparrows)).astype(int)
+        n_dead_sparrows = np.floor(kill_rate * len(sparrows)).astype(int)
         del sparrows[0:n_dead_sparrows]
 
         # Birth new sparrows
@@ -175,6 +185,12 @@ def run_simulation():
         new_insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(num_new_insects)]
         for ni in new_insects:
             insects.append(ni)
+
+        # Probability that insect reemerge
+        if np.random.rand() < insect_emerge_prob:
+            # for i in range(1, 2):
+            insects.append(Insects(lattice_size, insect_starvation_threshold, insect_age_limit))
+        # Grow rice
         amount_rice = np.sum(rice.fields[:, -1])
         rice.grow_rice()
 
@@ -182,14 +198,22 @@ def run_simulation():
         sparrow_pop.append(len(sparrows))
         insect_pop.append(len(insects))
         rice_pop.append(amount_rice)
+        #print(f'Amount of sparros = {len(sparrows)}, amount of insects = {len(insects)}')
 
     # Plots
+    plt.subplot(1, 2, 1)
     plt.plot(time, sparrow_pop)
     plt.plot(time, insect_pop)
-    plt.plot(time, rice_pop)
     plt.xlabel('t')
     plt.ylabel('Population')
-    plt.legend(['Sparrow population', 'Insect population', 'Amount of rice'])
-    plt.title(f'Time evolution of populations of Sparrows, insects and rice \n with killing rate of sparrows = {kill_rate}')
+    plt.legend(['Sparrow population', 'Insect population'])
+    plt.title(f'Time evolution of populations of Sparrows and insects \n with killing rate of sparrows = {kill_rate}')
+    plt.gca()
+
+    plt.subplot(1, 2, 2)
+    plt.plot(time, rice_pop, c='green')
+    plt.xlabel('t')
+    plt.ylabel('Amount of rice')
+    plt.title(f'Time evolution of amount of rice \n with killing rate of sparrows = {kill_rate}')
     plt.gca()
     plt.show()

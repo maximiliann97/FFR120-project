@@ -71,5 +71,8 @@ class Insects:
         index_min_rice_field = np.where(distances == min_distance)
         return min_distance, index_min_rice_field
 
+    def move_random(self):
+        self.position = np.random.randint(1, self.lattice_size + 1, 2)
+
 
 

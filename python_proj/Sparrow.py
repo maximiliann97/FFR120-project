@@ -2,7 +2,7 @@ import numpy as np
 
 
 class Sparrow:
-    def __init__(self, N: int, food_threshold,age_limit):
+    def __init__(self, N: int, food_threshold, age_limit):
         if isinstance(N, int):
             self.position = np.random.randint(1, N+1, 2)
         else:
@@ -45,8 +45,8 @@ class Sparrow:
             if direction == 'left' and self.position[0] > 1:
                 self.position[0] -= 1
 
-    def aged(self, day):
-        self.age += day
+    def aged(self):
+        self.age += 1
         if self.age > self.age_limit:
             self.alive = False
 
