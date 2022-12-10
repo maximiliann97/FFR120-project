@@ -8,7 +8,7 @@ class Sparrow:
         else:
             raise TypeError('Needs to take integer')
         self.age = 0
-        self.hungry = False
+        self.hungry = True
         self.alive = True
         self.days_without_food = 0
         self.lattice_size = N
