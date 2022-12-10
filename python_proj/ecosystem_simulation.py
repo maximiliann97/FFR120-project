@@ -8,7 +8,7 @@ from tqdm import trange
 
 def run_simulation():
     # Eco system parameters
-    kill_rate = 0.1
+    kill_rate = 0.0
 
     sparrow_growth_rate = 0.025
     sparrow_starvation_threshold = 3
