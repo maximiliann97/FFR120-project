@@ -52,10 +52,6 @@ def run_simulation():
         [bird.move(rice_coords_array) for bird in sparrows]
         [insect.move(rice_coords_array) for insect in insects]
 
-        sparrow_pop.append(len(sparrows))
-        insect_pop.append(len(insects))
-        rice_pop.append(amount_rice)
-
         # Sparrow eat loop
         for bird in sparrows:
             if bird.hungry:
