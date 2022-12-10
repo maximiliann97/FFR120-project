@@ -25,7 +25,7 @@ def run_simulation():
 
     # Initialize
     timesteps = 200
-    time = np.linspace(1, 200, 200)
+    time = np.linspace(0, 200, 201)
     lattice_size = 100
     nSparrows = 100
     nInsects = 110
@@ -37,6 +37,12 @@ def run_simulation():
     insect_pop = []
     rice_pop = []
 
+    #Add populations at timestep 0
+    sparrow_pop.append(len(sparrows))
+    insect_pop.append(len(insects))
+    rice_pop.append(np.sum(rice.fields[:, -1]))
+
+
     for t in range(timesteps):
         rice_field = rice.fields
         rice_coords_array = rice_field[:, 0:2]
@@ -45,6 +51,10 @@ def run_simulation():
         insect_y = [insect.position[1] for insect in insects]
         [bird.move(rice_coords_array) for bird in sparrows]
         [insect.move(rice_coords_array) for insect in insects]
+
+        sparrow_pop.append(len(sparrows))
+        insect_pop.append(len(insects))
+        rice_pop.append(amount_rice)
 
         # Sparrow eat loop
         for bird in sparrows:
@@ -83,6 +93,7 @@ def run_simulation():
 
                     # If the random number is not less than 0.5, feed the bird with an insect
                     else:
+
                         # Find the row in the insects_coords_array where the bird is
                         insect_row = np.where(true_insect == True)[0][0]
 
