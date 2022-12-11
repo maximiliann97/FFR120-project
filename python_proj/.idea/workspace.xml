@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="003a4b4f-4231-4690-ad78-03c45c3ffa00" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Figure 1 2022-12-08 20-36-08.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Figure_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/figure 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/figure 2 parameters.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/animation_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/animation_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecosystem_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecosystem_simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

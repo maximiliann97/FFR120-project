@@ -15,7 +15,7 @@ def run_animation():
     sparrow_age_limit = 75
 
     insect_growth_rate = 0.015
-    insect_starvation_threshold = 4
+    insect_starvation_threshold = 3
     insect_age_limit = 75
     insect_emerge_prob = 0.2
 
@@ -50,6 +50,7 @@ def run_animation():
         plt.scatter(rice_x, rice_y, c='g', s=500, zorder=1, marker='s')
         plt.legend(['Locust', 'Sparrow', 'Rice field'], loc='upper left', bbox_to_anchor=(0.125, 1.1), ncol=3,
                    fancybox=True, shadow=True)
+        plt.xlabel(f'Time step = {frame}')
 
         # Sparrow eat loop
         for bird in sparrows:
@@ -198,10 +199,9 @@ def run_animation():
     anim = animation.FuncAnimation(
         plt.figure(),  # The figure to animate
         update,  # The frame-generating function
-        frames=1000,  # The number of frames in the animation
-        interval=100  # The interval between frames, in milliseconds
+        frames=365,  # The number of frames in the animation
+        interval=200  # The interval between frames, in milliseconds
     )
 
     # Save the animation to a file
-    # anim.save("animation.gif", writer="imagemagick")
-    plt.show()
+    anim.save("animation.gif", writer="imagemagick")

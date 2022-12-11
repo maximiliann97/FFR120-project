@@ -8,7 +8,8 @@ from tqdm import trange
 
 def run_simulation():
     # Eco system parameters
-    kill_rate = 0.0
+    kill_rate_sparrows = 0.03
+    kill_rate_insects = 0.0
 
     sparrow_growth_rate = 0.025
     sparrow_starvation_threshold = 3
@@ -24,7 +25,7 @@ def run_simulation():
     rice_vs_insect_prob = 0.1
 
     # Initialize
-    timesteps = 5000
+    timesteps = 1000
     time = np.linspace(0, timesteps, timesteps+1)
     lattice_size = 100
     nSparrows = 200
@@ -168,8 +169,11 @@ def run_simulation():
                 insects.remove(insect)
 
         # Pest control
-        n_dead_sparrows = np.floor(kill_rate * len(sparrows)).astype(int)
+        n_dead_sparrows = np.floor(kill_rate_sparrows * len(sparrows)).astype(int)
         del sparrows[0:n_dead_sparrows]
+
+        n_dead_insects = np.floor(kill_rate_insects * len(insects)).astype(int)
+        del insects[0:n_dead_insects]
 
         # Birth new sparrows
         num_new_sparrows = np.ceil(len(sparrows) * sparrow_growth_rate).astype(int)
@@ -204,13 +208,13 @@ def run_simulation():
     plt.plot(time, insect_pop)
     plt.xlabel('t')
     plt.ylabel('Population')
-    plt.legend(['Sparrow population', 'Insect population'])
-    plt.title(f'Time evolution of populations of Sparrows and insects \n with killing rate of sparrows = {kill_rate}')
+    plt.legend(['Sparrow population', 'Insect population'], fancybox=True, shadow=True)
+    plt.title(f'Time evolution of populations of Sparrows and insects')
     plt.gca()
 
     plt.subplot(1, 2, 2)
     plt.plot(time, rice_pop, c='green')
     plt.xlabel('t')
     plt.ylabel('Amount of rice')
-    plt.title(f'Time evolution of amount of rice \n with killing rate of sparrows = {kill_rate}')
+    plt.title(f'Time evolution of amount of rice')
     plt.gca()
