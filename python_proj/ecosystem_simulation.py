@@ -8,8 +8,8 @@ from tqdm import trange
 
 def run_simulation():
     # Eco system parameters
-    kill_rate_sparrows = 0.02
-    kill_rate_insects = 0.0
+    kill_rate_sparrows = 0.03
+    kill_rate_insects = 0.03
 
     sparrow_growth_rate = 0.025
     sparrow_starvation_threshold = 3
@@ -46,7 +46,7 @@ def run_simulation():
         insects = [Insects(lattice_size, insect_starvation_threshold, insect_age_limit) for _ in range(nInsects)]
         rice = Rice(lattice_size, start_rice, rice_growth_per_day)
 
-        for t in range(1, timesteps):
+        for t in trange(1, timesteps):
             rice_field = rice.fields
             rice_coords_array = rice_field[:, 0:2]
 
