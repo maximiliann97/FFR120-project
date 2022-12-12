@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a35271d-9643-4f9d-9829-a88dcc915ee8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_proj/Images/Without killing rates.png" beforeDir="false" afterPath="$PROJECT_DIR$/python_proj/Images/Without killing rates.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python_proj/ecosystem_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_proj/ecosystem_simulation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +33,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager">
     <configuration name="Sparrow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FFR120-project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -146,6 +148,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
