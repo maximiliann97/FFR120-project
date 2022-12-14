@@ -7,6 +7,12 @@
     <list default="true" id="003a4b4f-4231-4690-ad78-03c45c3ffa00" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecosystem_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecosystem_simulation.py" afterDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/insect_pop_SK=0.0IK=0.0, it = 100.npy" beforeDir="false" afterPath="$PROJECT_DIR$/insect_pop_SK=0.0IK=0.0, it = 100.npy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rice_pop_SK=0.0IK=0.0, it = 100.npy" beforeDir="false" afterPath="$PROJECT_DIR$/rice_pop_SK=0.0IK=0.0, it = 100.npy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sparrow_pop_SK=0.0IK=0.0, it = 100.npy" beforeDir="false" afterPath="$PROJECT_DIR$/sparrow_pop_SK=0.0IK=0.0, it = 100.npy" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
