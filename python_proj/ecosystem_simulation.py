@@ -8,8 +8,8 @@ from tqdm import trange
 
 def run_simulation():
     # Eco system parameters
-    kill_rate_sparrows = 0.03
-    kill_rate_insects = 0.03
+    kill_rate_sparrows = 0.0
+    kill_rate_insects = 0.0
 
     sparrow_growth_rate = 0.025
     sparrow_starvation_threshold = 3
@@ -25,8 +25,8 @@ def run_simulation():
     rice_vs_insect_prob = 0.1
 
     # Initialize
-    nIterations = 20
-    timesteps = 1000
+    nIterations = 100
+    timesteps = 2000
     time = np.reshape(np.arange(timesteps), [1, timesteps])
     lattice_size = 100
     nSparrows = 200
@@ -67,7 +67,7 @@ def run_simulation():
                         # Generate a random number
                         r = np.random.rand()
 
-                        # If the random number is less than 0.5, feed the bird with rice
+                        # If the random number is less than 0.1, feed the bird with rice
                         if r < rice_vs_insect_prob:
 
                             # Find the row in the rice field where the bird is
@@ -207,24 +207,30 @@ def run_simulation():
     avg_sparrow_pop = sparrow_pop / nIterations
     avg_insect_pop = insect_pop / nIterations
     avg_rice_pop = rice_pop / nIterations
+
     rice_array = np.asarray(avg_rice_pop)
-    np.save(f'rice_pop_SK={kill_rate_sparrows}IK={kill_rate_insects}', rice_array)
+    sparrow_array = np.asarray(avg_sparrow_pop)
+    insect_array = np.asarray(avg_insect_pop)
+
+    np.save(f'rice_pop_SK={kill_rate_sparrows}IK={kill_rate_insects}, it = {nIterations}', rice_array)
+    np.save(f'sparrow_pop_SK={kill_rate_sparrows}IK={kill_rate_insects}, it = {nIterations}', sparrow_array)
+    np.save(f'insect_pop_SK={kill_rate_sparrows}IK={kill_rate_insects}, it = {nIterations}', insect_array)
 
     # Plots
     plt.subplot(1, 2, 1)
     plt.plot(time[0], avg_sparrow_pop[0])
     plt.plot(time[0], avg_insect_pop[0])
-    plt.xlabel('t', fontsize=14)
-    plt.ylabel('Population', fontsize=14)
-    plt.tick_params(labelsize=14)
-    plt.legend(['Sparrow population', 'Insect population'], fancybox=True, shadow=True)
-    plt.title(f'Time evolution of populations of Sparrows and insects \n averaged over {nIterations} iterations', fontsize=16)
+    plt.xlabel('t', fontsize=18)
+    plt.ylabel('Population', fontsize=18)
+    plt.tick_params(labelsize=18)
+    plt.legend(['Sparrow population', 'Insect population'], fancybox=True, shadow=True, fontsize=20)
+    #plt.title(f'Time evolution of populations of Sparrows and insects \n averaged over {nIterations} iterations', fontsize=18)
     plt.gca()
 
     plt.subplot(1, 2, 2)
     plt.plot(time[0], avg_rice_pop[0], c='green')
-    plt.xlabel('t', fontsize=14)
-    plt.ylabel('Amount of rice', fontsize=14)
-    plt.tick_params(labelsize=14)
-    plt.title(f'Time evolution of amount of rice averaged\n over {nIterations} iterations', fontsize=16)
+    plt.xlabel('t', fontsize=18)
+    plt.ylabel('Amount of rice', fontsize=18)
+    plt.tick_params(labelsize=18)
+    #plt.title(f'Time evolution of amount of rice averaged\n over {nIterations} iterations', fontsize=18)
     plt.gca()
