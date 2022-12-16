@@ -5,20 +5,29 @@ timesteps = 1000
 nIterations = 20
 time = np.reshape(np.arange(timesteps), [1, timesteps])
 
-rice_no_kill = np.load('rice_pop_SK=0.0IK=0.0.npy')
-rice_kill_spa = np.load('rice_pop_SK=0.02IK=0.0.npy')
-rice_kill_in = np.load('rice_pop_SK=0.0IK=0.03.npy')
-rice_kill_both = np.load('rice_pop_SK=0.03IK=0.03.npy')
+rice_no_kill = np.load('rice_pop_SK=0.0IK=0.0, it = 100.npy')
+rice_kill_spa = np.load('rice_pop_SK=0.02IK=0.0, it = 100.npy')
+rice_kill_in = np.load('rice_pop_SK=0.0IK=0.03, it = 100.npy')
+rice_kill_both = np.load('rice_pop_SK=0.03IK=0.03, it = 100.npy')
+
+rice_no_kill = rice_no_kill[0][:1000]
+rice_kill_spa = rice_kill_spa[0][:1000]
+rice_kill_in = rice_kill_in[0][:1000]
+rice_kill_both = rice_kill_both[0][:1000]
+
+rice_no_kill = np.reshape(rice_no_kill, (1, 1000))
+rice_kill_spa = np.reshape(rice_kill_spa, (1, 1000))
+rice_kill_in = np.reshape(rice_kill_in, (1, 1000))
+rice_kill_both = np.reshape(rice_kill_both, (1, 1000))
 
 plt.plot(time[0], rice_no_kill[0])
 plt.plot(time[0], rice_kill_spa[0])
 plt.plot(time[0], rice_kill_in[0])
 plt.plot(time[0], rice_kill_both[0])
 
-plt.xlabel('t', fontsize=14)
-plt.ylabel('Amount of rice', fontsize=14)
-plt.tick_params(labelsize=14)
-plt.legend(['No intervention', '2% Killing rate of sparrows', '3% Killing rate of insects', '3% Killing rate of both populations'])
+plt.xlabel('t', fontsize=20)
+plt.ylabel('Amount of rice', fontsize=20)
+plt.tick_params(labelsize=20)
+plt.legend([r'$\alpha=0$, $\beta=0$', r'$\alpha=0.02$', r'$\beta=0.03$', r'$\alpha=0.03$, $\beta=0.03$'], fontsize=20)
 
-plt.title(f'Time evolution of amount of rice for different strategies\n averaged over {nIterations} iterations', fontsize=16)
 plt.show()
