@@ -5,10 +5,10 @@ timesteps = 1000
 nIterations = 20
 time = np.reshape(np.arange(timesteps), [1, timesteps])
 
-rice_no_kill = np.load('rice_pop_SK=0.0IK=0.0, it = 100.npy')
-rice_kill_spa = np.load('rice_pop_SK=0.02IK=0.0, it = 100.npy')
-rice_kill_in = np.load('rice_pop_SK=0.0IK=0.03, it = 100.npy')
-rice_kill_both = np.load('rice_pop_SK=0.03IK=0.03, it = 100.npy')
+rice_no_kill = np.load('Data/rice_pop_SK=0.0IK=0.0, it = 100.npy')
+rice_kill_spa = np.load('Data/rice_pop_SK=0.02IK=0.0, it = 100.npy')
+rice_kill_in = np.load('Data/rice_pop_SK=0.0IK=0.03, it = 100.npy')
+rice_kill_both = np.load('Data/rice_pop_SK=0.03IK=0.03, it = 100.npy')
 
 rice_no_kill = rice_no_kill[0][:1000]
 rice_kill_spa = rice_kill_spa[0][:1000]
