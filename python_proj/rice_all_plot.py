@@ -20,14 +20,17 @@ rice_kill_spa = np.reshape(rice_kill_spa, (1, 1000))
 rice_kill_in = np.reshape(rice_kill_in, (1, 1000))
 rice_kill_both = np.reshape(rice_kill_both, (1, 1000))
 
+plt.figure(figsize=(9, 8))
 plt.plot(time[0], rice_no_kill[0])
 plt.plot(time[0], rice_kill_spa[0])
 plt.plot(time[0], rice_kill_in[0])
 plt.plot(time[0], rice_kill_both[0])
 
+
 plt.xlabel('t', fontsize=20)
 plt.ylabel('Amount of rice', fontsize=20)
 plt.tick_params(labelsize=20)
-plt.legend([r'$\alpha=0$, $\beta=0$', r'$\alpha=0.02$', r'$\beta=0.03$', r'$\alpha=0.03$, $\beta=0.03$'], fontsize=20)
+plt.legend([r'$\alpha=0$, $\beta=0$', r'$\alpha=0.02$, $\beta=0$', r'$\alpha=0$, $\beta=0.03$', r'$\alpha=0.03$, $\beta=0.03$'], fontsize=20)
+plt.tight_layout()
 
 plt.show()
