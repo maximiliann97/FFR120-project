@@ -4,9 +4,9 @@ import numpy as np
 timesteps = 1400
 time = np.reshape(np.arange(timesteps), [1, timesteps])
 
-avg_sparrow_pop = np.load('Data/sparrow_pop_SK=0.03IK=0.03, it = 100.npy')
-avg_insect_pop = np.load('Data/insect_pop_SK=0.03IK=0.03, it = 100.npy')
-avg_rice_pop = np.load('Data/rice_pop_SK=0.03IK=0.03, it = 100.npy')
+avg_sparrow_pop = np.load('Data/sparrow_pop_SK=0.0IK=0.0, it = 100.npy')
+avg_insect_pop = np.load('Data/insect_pop_SK=0.0IK=0.0, it = 100.npy')
+avg_rice_pop = np.load('Data/rice_pop_SK=0.0IK=0.0, it = 100.npy')
 
 
 

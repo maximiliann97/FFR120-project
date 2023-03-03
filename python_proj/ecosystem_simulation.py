@@ -8,8 +8,8 @@ from tqdm import trange
 
 def run_simulation():
     # Eco system parameters
-    kill_rate_sparrows = 0.02
-    kill_rate_insects = 0.0
+    kill_rate_sparrows = 0.017
+    kill_rate_insects = 0.03
 
     sparrow_growth_rate = 0.025
     sparrow_starvation_threshold = 3
@@ -26,7 +26,7 @@ def run_simulation():
 
     # Initialize
     nIterations = 100
-    timesteps = 1000
+    timesteps = 1400
     time = np.reshape(np.arange(timesteps), [1, timesteps])
     lattice_size = 100
     nSparrows = 200
